@@ -1,0 +1,52 @@
+.button {
+    /* Common button styles */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+/* Primary Button Styles */
+.button-primary {
+    background-color: #fff; /* Blue */
+    color: #000;
+}
+
+.button-primary:hover {
+    background-color: #6c757d; /* Darker blue on hover */
+}
+
+/* Secondary Button Styles */
+.button-secondary {
+    background-color: #6c757d; /* Gray */
+    color: #fff;
+}
+
+.button-secondary:hover {
+    background-color: #545b62; /* Darker gray on hover */
+}
+
+/* Outline Button Styles */
+.button-outline {
+    background-color: transparent;
+    color: #007bff; /* Blue */
+    border: 2px solid #007bff; /* Blue */
+}
+
+.button-outline:hover {
+    background-color: #007bff; /* Blue on hover */
+    color: #fff; /* Text color becomes white on hover */
+}
+
+/* Destructive Button Styles */
+.button-destructive {
+    background-color: #dc3545; /* Red */
+    color: #fff;
+}
+
+.button-destructive:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
