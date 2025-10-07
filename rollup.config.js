@@ -6,31 +6,27 @@ const packageJson = require('./package.json');
 const postcss = require('rollup-plugin-postcss');
 
 module.exports = [
-    {
-        input: 'src/index.ts',
-        output: [
-            {
-                file: packageJson.main,
-                format: 'cjs',
-                sourcemap: true,
-            },
-            {
-                file: packageJson.module,
-                format: 'esm',
-                sourcemap: true,
-            },
-        ],
-        plugins: [
-            resolve(),
-            commonjs(),
-            typescript({ tsconfig: './tsconfig.json' }),
-            postcss()
-        ],
-    },
-    {
-        input: 'dist/esm/types/index.d.ts',
-        output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-        plugins: [dts.default()],
-        external: [/\.css$/],
-    }
+  {
+    input: 'src/index.ts',
+    external: ['react', 'react-dom', 'react/jsx-runtime'],
+    output: [
+      {
+        file: packageJson.main,
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: packageJson.module,
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' }), postcss()],
+  },
+  {
+    input: 'dist/esm/types/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    plugins: [dts.default()],
+    external: [/\.css$/],
+  },
 ];

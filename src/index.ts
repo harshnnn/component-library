@@ -1,2 +1,2 @@
 export * from './components';
-//rollup , bundler, commonJS, ES6module
+export { default as Button } from './components/Button';
