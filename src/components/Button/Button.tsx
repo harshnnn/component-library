@@ -1,48 +1,64 @@
 import React from "react";
 import './Button.css';
 
-interface ButtonProps {
-    label: string;
-    onClick?: () => void;
-    disabled?: boolean;
-    className?: string;
-    type?: "button" | "submit" | "reset";
-    variant?: "primary" | "secondary" | "outline" | "destructive";
+const BASE_CLASS = 'rc-button';
+
+const VARIANT_CLASS_MAP: Record<ButtonVariant, string> = {
+  primary: `${BASE_CLASS}--primary`,
+  secondary: `${BASE_CLASS}--secondary`,
+  outline: `${BASE_CLASS}--outline`,
+  destructive: `${BASE_CLASS}--destructive`,
+  ghost: `${BASE_CLASS}--ghost`,
+};
+
+const SIZE_CLASS_MAP: Record<ButtonSize, string> = {
+  sm: `${BASE_CLASS}--sm`,
+  md: `${BASE_CLASS}--md`,
+  lg: `${BASE_CLASS}--lg`,
+};
+
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
-    label,
-    onClick,
-    disabled,
-    className,
-    type = "button",
-    variant = "primary",
+export const Button: React.FC<ButtonProps> = ({
+  label,
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  disabled = false,
+  className,
+  type = 'button',
+  ...rest
 }) => {
-    const getButtonStyle = () => {
-        switch (variant) {
-            case "primary":
-                return "button-primary";
-            case "secondary":
-                return "button-secondary";
-            case "outline":
-                return "button-outline";
-            case "destructive":
-                return "button-destructive";
-            default:
-                return "";
-        }
-    };
+  const mergedClassName = [
+    BASE_CLASS,
+    VARIANT_CLASS_MAP[variant],
+    SIZE_CLASS_MAP[size],
+    loading ? `${BASE_CLASS}--loading` : null,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-    return (
-        <button
-            className={`button ${getButtonStyle()} ${className || ''}`}
-            onClick={onClick}
-            disabled={disabled}
-            type={type}
-        >
-            {label}
-        </button>
-    );
+  return (
+    <button
+      type={type}
+      className={mergedClassName}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...rest}
+    >
+      {loading && <span className={`${BASE_CLASS}__spinner`} aria-hidden="true" />}
+      <span className={`${BASE_CLASS}__label`}>{label}</span>
+    </button>
+  );
 };
 
 export default Button;

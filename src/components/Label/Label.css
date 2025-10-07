@@ -1,0 +1,34 @@
+:root {
+  --rc-label-color: #0f172a;
+  --rc-label-required: #ef4444;
+  --rc-label-description: #64748b;
+}
+
+.rc-label {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--rc-label-color);
+}
+
+.rc-label__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rc-label__text {
+  line-height: 1.2;
+}
+
+.rc-label__required {
+  color: var(--rc-label-required);
+}
+
+.rc-label__description {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--rc-label-description);
+}

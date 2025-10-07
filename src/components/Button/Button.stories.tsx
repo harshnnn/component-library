@@ -1,39 +1,69 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import Button  from './Button';
+import React from 'react';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: 'ReactComponentLibrary/Button',
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    label : "hello world!",
-    backgroundColor : {control:"color"}
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'destructive', 'ghost'],
+    },
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg'],
+    },
+    loading: {
+      control: 'boolean',
+    },
+    onClick: { action: 'clicked' },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const HelloWorld: Story = {
+type Story = StoryObj<typeof Button>;
+
+export const Playground: Story = {
   args: {
-    label: 'Hello World!',
+    label: 'Launch Product',
+    variant: 'primary',
+    size: 'md',
   },
 };
 
-export const ClickMe: Story = {
+export const Variants: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button {...args} variant="primary" label="Primary" />
+      <Button {...args} variant="secondary" label="Secondary" />
+      <Button {...args} variant="outline" label="Outline" />
+      <Button {...args} variant="destructive" label="Destructive" />
+      <Button {...args} variant="ghost" label="Ghost" />
+    </div>
+  ),
+};
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button {...args} size="sm" label="Small" />
+      <Button {...args} size="md" label="Medium" />
+      <Button {...args} size="lg" label="Large" />
+    </div>
+  ),
+};
+
+export const Loading: Story = {
   args: {
-    label: 'Click Me!!',
+    label: 'Processing…',
+    loading: true,
+    variant: 'secondary',
   },
 };
 

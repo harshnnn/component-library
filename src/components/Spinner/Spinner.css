@@ -1,0 +1,65 @@
+:root {
+  --rc-spinner-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 70%, #ec4899 100%);
+  --rc-spinner-neutral: rgba(148, 163, 184, 0.4);
+}
+
+.rc-spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+.rc-spinner__circle {
+  border-radius: 999px;
+  border-style: solid;
+  border-color: transparent;
+  animation: rc-spinner-spin 0.8s linear infinite;
+}
+
+.rc-spinner--sm .rc-spinner__circle {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.rc-spinner--md .rc-spinner__circle {
+  width: 22px;
+  height: 22px;
+  border-width: 3px;
+}
+
+.rc-spinner--lg .rc-spinner__circle {
+  width: 28px;
+  height: 28px;
+  border-width: 3px;
+}
+
+.rc-spinner--primary .rc-spinner__circle {
+  border-top-color: #ffffff;
+  border-right-color: #ffffff;
+  background: var(--rc-spinner-primary);
+}
+
+.rc-spinner--neutral .rc-spinner__circle {
+  border-top-color: rgba(148, 163, 184, 0.8);
+  border-right-color: rgba(148, 163, 184, 0.8);
+  background: var(--rc-spinner-neutral);
+}
+
+.rc-spinner__label {
+  font-weight: 500;
+}
+
+@keyframes rc-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-spinner__circle {
+    animation: none;
+  }
+}

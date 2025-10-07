@@ -1,52 +1,137 @@
-.button {
-    /* Common button styles */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease; 
+:root {
+  --rc-radius: 12px;
+  --rc-font-weight: 600;
+  --rc-shadow: 0 12px 24px -16px rgba(45, 16, 141, 0.6);
+  --rc-border: rgba(255, 255, 255, 0.35);
+  --rc-color-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  --rc-color-secondary: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 100%);
+  --rc-color-outline: rgba(99, 102, 241, 0.14);
+  --rc-color-destructive: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  --rc-color-ghost: transparent;
+  --rc-text-on-dark: #ffffff;
+  --rc-text-on-light: #0f172a;
 }
 
-/* Primary Button Styles */
-.button-primary {
-    background-color: #fff; /* Blue */
-    color: #000;
+.rc-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: var(--rc-radius);
+  border: 1px solid transparent;
+  font-weight: var(--rc-font-weight);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease,
+    border-color 160ms ease, color 160ms ease;
+  box-shadow: var(--rc-shadow);
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
-.button-primary:hover {
-    background-color: #6c757d; /* Darker blue on hover */
+.rc-button--primary {
+  background-image: var(--rc-color-primary);
+  color: var(--rc-text-on-dark);
 }
 
-/* Secondary Button Styles */
-.button-secondary {
-    background-color: #6c757d; /* Gray */
-    color: #fff;
+.rc-button--secondary {
+  background-image: var(--rc-color-secondary);
+  color: var(--rc-text-on-dark);
 }
 
-.button-secondary:hover {
-    background-color: #545b62; /* Darker gray on hover */
+.rc-button--outline {
+  background-color: rgba(99, 102, 241, 0.08);
+  color: #312e81;
+  border-color: var(--rc-color-outline);
+  box-shadow: none;
 }
 
-/* Outline Button Styles */
-.button-outline {
-    background-color: transparent;
-    color: #007bff; /* Blue */
-    border: 2px solid #007bff; /* Blue */
+.rc-button--destructive {
+  background-image: var(--rc-color-destructive);
+  color: var(--rc-text-on-dark);
 }
 
-.button-outline:hover {
-    background-color: #007bff; /* Blue on hover */
-    color: #fff; /* Text color becomes white on hover */
+.rc-button--ghost {
+  background-color: transparent;
+  color: #1f2937;
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: none;
 }
 
-/* Destructive Button Styles */
-.button-destructive {
-    background-color: #dc3545; /* Red */
-    color: #fff;
+.rc-button--sm {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.85rem;
 }
 
-.button-destructive:hover {
-    background-color: #c82333; /* Darker red on hover */
+.rc-button--md {
+  padding: 0.75rem 1.4rem;
+  font-size: 0.95rem;
+}
+
+.rc-button--lg {
+  padding: 0.95rem 1.8rem;
+  font-size: 1.05rem;
+}
+
+.rc-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.rc-button:active:not(:disabled) {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+.rc-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.28);
+}
+
+.rc-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.rc-button--loading {
+  cursor: progress;
+}
+
+.rc-button__label {
+  position: relative;
+  z-index: 1;
+}
+
+.rc-button__spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: rgba(255, 255, 255, 1);
+  animation: rc-spin 700ms linear infinite;
+}
+
+.rc-button--outline .rc-button__spinner,
+.rc-button--ghost .rc-button__spinner {
+  border-color: rgba(99, 102, 241, 0.25);
+  border-top-color: #6366f1;
+}
+
+@keyframes rc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-button,
+  .rc-button:hover,
+  .rc-button:active,
+  .rc-button__spinner {
+    transition: none;
+    animation: none;
+  }
 }

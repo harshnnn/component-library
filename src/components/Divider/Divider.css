@@ -1,0 +1,36 @@
+:root {
+  --rc-divider-color: rgba(148, 163, 184, 0.5);
+  --rc-divider-thickness: 1px;
+}
+
+.rc-divider {
+  background-color: var(--rc-divider-color);
+}
+
+.rc-divider--horizontal {
+  width: 100%;
+  height: var(--rc-divider-thickness);
+}
+
+.rc-divider--vertical {
+  width: var(--rc-divider-thickness);
+  height: 100%;
+  min-height: 24px;
+}
+
+.rc-divider--dashed {
+  background: none;
+  border-style: dashed;
+  border-color: var(--rc-divider-color);
+  border-width: 0;
+}
+
+.rc-divider--dashed.rc-divider--horizontal {
+  border-top-width: var(--rc-divider-thickness);
+}
+
+.rc-divider--dashed.rc-divider--vertical {
+  border-left-width: var(--rc-divider-thickness);
+  height: 100%;
+}
+

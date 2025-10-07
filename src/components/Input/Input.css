@@ -1,0 +1,111 @@
+:root {
+  --rc-input-radius: 12px;
+  --rc-input-border: rgba(99, 102, 241, 0.2);
+  --rc-input-border-hover: rgba(99, 102, 241, 0.45);
+  --rc-input-shadow: 0 12px 24px -20px rgba(15, 23, 42, 0.45);
+  --rc-input-label: #0f172a;
+  --rc-input-text: #111827;
+  --rc-input-placeholder: rgba(30, 41, 59, 0.45);
+  --rc-input-bg: rgba(255, 255, 255, 0.9);
+  --rc-input-bg-disabled: rgba(241, 245, 249, 0.9);
+  --rc-input-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  --rc-input-error: #ef4444;
+  --rc-input-helper: #64748b;
+}
+
+.rc-input {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--rc-input-text);
+  font-size: 0.95rem;
+}
+
+.rc-input--full {
+  width: 100%;
+}
+
+.rc-input__label {
+  font-weight: 600;
+  color: var(--rc-input-label);
+  letter-spacing: 0.01em;
+}
+
+.rc-input__field-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.rc-input__field {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--rc-input-radius);
+  border: 1px solid var(--rc-input-border);
+  font: inherit;
+  color: inherit;
+  background: var(--rc-input-bg);
+  box-shadow: var(--rc-input-shadow);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease,
+    background 180ms ease;
+}
+
+.rc-input__field::placeholder {
+  color: var(--rc-input-placeholder);
+}
+
+.rc-input__field:hover:not(:disabled) {
+  border-color: var(--rc-input-border-hover);
+  transform: translateY(-1px);
+}
+
+.rc-input__field:focus-visible {
+  outline: none;
+  border-color: transparent;
+}
+
+.rc-input__focus-ring {
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--rc-input-radius);
+  background: var(--rc-input-gradient);
+  opacity: 0;
+  transition: opacity 160ms ease;
+  z-index: -1;
+}
+
+.rc-input__field:focus-visible + .rc-input__focus-ring {
+  opacity: 1;
+}
+
+.rc-input__message {
+  font-size: 0.8rem;
+  color: var(--rc-input-helper);
+}
+
+.rc-input--error .rc-input__field {
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.rc-input--error .rc-input__focus-ring {
+  background: linear-gradient(135deg, #f87171 0%, #f43f5e 100%);
+  opacity: 1;
+}
+
+.rc-input--error .rc-input__message {
+  color: var(--rc-input-error);
+}
+
+.rc-input--disabled .rc-input__field {
+  background: var(--rc-input-bg-disabled);
+  color: rgba(15, 23, 42, 0.6);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-input__field,
+  .rc-input__focus-ring {
+    transition: none;
+  }
+}
